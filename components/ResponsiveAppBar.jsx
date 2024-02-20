@@ -14,8 +14,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 //import AdbIcon from '@mui/icons-material/Adb';
-import logo from '../public/MedoLogoHrz.png';
-import avatar from '../public/avatar1.jpg';
+import logo from '../public/images/MedoLogoHrz.png';
+import avatar from '../public/images/avatar1.jpg';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];

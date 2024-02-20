@@ -1,4 +1,5 @@
 //Index Page.
+'use client'
 import * as React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -13,12 +14,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
-import appLoginBackgroundImage from "../public/images/pexels-anna-shvets-4586902.jpg";
-import meDoLogoVerticle from "../public/images/meDoLogoVerticle.png";
-import LoginBtn from "@/components/LoginBtn";
+import appLoginBackgroundImage from "../../public/images/pexels-anna-shvets-4586902.jpg";
+import meDoLogoVerticle from "../../public/images/meDoLogoVerticle.png";
+import CustomTextField from "@/components/Textfield";
 import SignupBtn from "@/components/SignupBtn";
 
-export default function Index() {
+export default function Signin() {
   return (
     <Container component="main" maxWidth="xs" sx={{
       borderRadius: '10px',
@@ -66,23 +67,25 @@ export default function Index() {
               paddingTop: "1.5rem",
             }}
           >
-            <img src={appLoginBackgroundImage.src} width="100%" />
+            <CustomTextField
+              id="email"
+              label="Email"
+              name="email"
+              placeholder="Email"
+              onChange={(e) => setFirstname(e.target.value)}
+            />
+            <Box>
+                <TextField
+                    id="outlined-password-input"
+                    label="Password"
+                    type="password"
+                    autoComplete="current-password"
+                />
+            </Box>
           </Box>
-          <Typography
-            component="p"
-            sx={{
-              textAlign: "center",
-              paddingTop: "1.5rem",
-              mb: "1.5rem",
-            }}
-          >
-            MeDo is a productivity app that helps you organize your tasks and
-            get your work done.
-          </Typography>
+          
         </Box>
-        <Box>
-          <Link href={"/signin"}><LoginBtn /></Link>
-        </Box>
+        
         <Box sx={{
               width: "50%",
               marginLeft: "auto",
