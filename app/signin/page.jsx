@@ -75,7 +75,7 @@ export default function Signin() {
               label="Email"
               name="email"
               placeholder="Email"
-              onChange={(e) => setFirstname(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <CustomTextField
@@ -84,7 +84,7 @@ export default function Signin() {
               name="password"
               placeholder="password"
               type="password"
-              onChange={(e) => setFirstname(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           
         </Box>

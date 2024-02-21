@@ -67,9 +67,6 @@ export default function Index() {
             }} >
            Tap the <span style={{fontWeight: "500", fontSize: "1.7rem", color: "rgb(0 99 97)"}}>+</span> button to add a task.
           </Typography>
-
-
-
         </Box>
         <Box>
           <NewTaskBtn />
