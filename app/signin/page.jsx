@@ -13,11 +13,10 @@ import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
-import appLoginBackgroundImage from "../../public/images/pexels-anna-shvets-4586902.jpg";
+import TextField from '@mui/material/TextField';
 import meDoLogoVerticle from "../../public/images/meDoLogoVerticle.png";
 import CustomTextField from "@/components/Textfield";
-import SignupBtn from "@/components/SignupBtn";
+
 
 export default function Signin() {
   return (
@@ -52,6 +51,17 @@ export default function Signin() {
           backgroundColor: "aliceblue",
         }}
       >
+        <Typography
+            component="p"
+            sx={{
+              textAlign: "center",
+              paddingTop: "0.5rem",
+              mb: '0.5rem',
+              color: "#545454",
+            }}
+          >
+            Got no Account yet? <Link href={"/signup"}>SignUp</Link>
+          </Typography>
         <Box
           sx={{
             // marginTop: 8,
@@ -60,13 +70,6 @@ export default function Signin() {
             alignItems: "center",
           }}
         >
-          <Box
-            component="section"
-            maxWidth="xs"
-            sx={{
-              paddingTop: "1.5rem",
-            }}
-          >
             <CustomTextField
               id="email"
               label="Email"
@@ -74,15 +77,15 @@ export default function Signin() {
               placeholder="Email"
               onChange={(e) => setFirstname(e.target.value)}
             />
-            <Box>
-                <TextField
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                />
-            </Box>
-          </Box>
+
+            <CustomTextField
+              id="password"
+              label="password"
+              name="password"
+              placeholder="password"
+              type="password"
+              onChange={(e) => setFirstname(e.target.value)}
+            />
           
         </Box>
         
@@ -102,11 +105,8 @@ export default function Signin() {
               color: "#545454",
             }}
           >
-            No. I'm new here
+            <Link href={"/signup"}>Forgot password?</Link>
           </Typography>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
-        <Link href={"/signup"}><SignupBtn /></Link>
-        </Box>
       </Container>
     </Container>
   );

@@ -1,3 +1,4 @@
+
 //App Dashboard
 import * as React from "react";
 import Container from "@mui/material/Container";
@@ -37,18 +38,38 @@ export default function Index() {
             alignItems: "center",
           }}
         >
+
           <Typography
             component="p"
             sx={{
               textAlign: "center",
               paddingTop: "1.5rem",
+              mb: "1rem",
+              fontWeight: "600",
+              color: "#006361",
             }}
           >
-             <hr style={{ border: "solid '#6c6a6f' 0.3px"}} />
-             <span style={{textAlign: "left", color: "#6c6a6f"}}>No tasks found.</span>
-            <p>You have not added any tasks yet.</p>
-            <p style={{color: "#6c6a6f"}}>Tap the <span style={{fontWeight: "500", fontSize: "1.7rem", color: "rgb(0 99 97)"}}>+</span> button to add a task.</p>
+             No tasks found
           </Typography>
+          <Typography
+            component="p"
+            sx={{
+              textAlign: "center",
+            }} >
+            You have not added any tasks yet.
+          </Typography>
+
+          <Typography
+            component="p"
+            sx={{
+              textAlign: "center",
+              color: "#6c6a6f"
+            }} >
+           Tap the <span style={{fontWeight: "500", fontSize: "1.7rem", color: "rgb(0 99 97)"}}>+</span> button to add a task.
+          </Typography>
+
+
+
         </Box>
         <Box>
           <NewTaskBtn />
