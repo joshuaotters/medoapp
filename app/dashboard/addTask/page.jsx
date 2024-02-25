@@ -16,6 +16,11 @@ import IconButton from "@mui/material/IconButton";
 import TextArea from "@/components/TextArea";
 import CustomTextField from "@/components/Textfield";
 import ResponsiveDatePickers from "@/components/DateTimePicker";
+import TaskCategory from "@/components/TaskCategory";
+import { FormControl } from "@mui/base";
+import TaskPriority from "@/components/TaskPriority";
+import SubmitBtn from "@/components/SubmitButton";
+
 
 
 export default function AddTask() {
@@ -39,14 +44,7 @@ export default function AddTask() {
           backgroundColor: "aliceblue",
         }}
       >
-        <Box
-          sx={{
-            // marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <FormControl>
             <CustomTextField
               id="taskName"
               label="Task Name"
@@ -62,7 +60,10 @@ export default function AddTask() {
                  onChange={(e) => setTaskName(e.target.value)}
             />
             <ResponsiveDatePickers/>
-        </Box>
+            <TaskCategory/>
+            <TaskPriority/>
+            <SubmitBtn/>
+          </FormControl>
       </Container>
     </Container>
   );

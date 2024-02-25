@@ -16,6 +16,8 @@ import IconButton from "@mui/material/IconButton";
 import TextField from '@mui/material/TextField';
 import meDoLogoVerticle from "../../public/images/meDoLogoVerticle.png";
 import CustomTextField from "@/components/Textfield";
+import SignInBtn from "@/components/SignInBtn";
+import GoogleSignInBtn from "@/components/GoogleSignInBtn";
 
 
 export default function Signin() {
@@ -60,7 +62,7 @@ export default function Signin() {
               color: "#545454",
             }}
           >
-            Got no Account yet? <Link href={"/signup"}>SignUp</Link>
+            Got no account yet? <Link href={"/signup"}>SignUp</Link>
           </Typography>
         <Box
           sx={{
@@ -80,9 +82,9 @@ export default function Signin() {
 
             <CustomTextField
               id="password"
-              label="password"
+              label="Password"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -96,15 +98,17 @@ export default function Signin() {
             }}>
           <hr/>
         </Box>
+        <SignInBtn/>
+        <GoogleSignInBtn/>
         <Typography
             component="p"
             sx={{
               textAlign: "center",
               paddingTop: "0.5rem",
               mb: '0.5rem',
+              mt: '0.5rem',
               color: "#545454",
-            }}
-          >
+            }} >
             <Link href={"/signup"}>Forgot password?</Link>
           </Typography>
       </Container>

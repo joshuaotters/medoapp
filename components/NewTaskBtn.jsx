@@ -4,7 +4,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link'
 
-export default function NewTaskButton() {
+export default function NewTaskBtn() {
   return (
     <Box style={{ '& > :not(style)': { m: 1 } }}>
       <Link href={"/dashboard/addTask"}>
