@@ -10,7 +10,8 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
-import TaskCompletionState from './Task-completion-state';
+import TaskState from './TaskState';
+
 
 export default function Task() {
   return (
@@ -44,7 +45,7 @@ export default function Task() {
         </Typography>
       </CardContent>
       <CardActions>
-      <TaskCompletionState/>
+      <TaskState/>
         <Typography sx={{
           marginLeft: "0.5rem",
           borderRadius: "6px",

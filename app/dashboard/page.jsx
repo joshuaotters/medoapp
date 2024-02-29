@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import NoTask from "@/components/NoTasks";
 import NewTaskBtn from "@/components/NewTaskBtn";
+import Task from "@/components/Task";
 
 
 export default function Index() {
@@ -32,8 +33,9 @@ export default function Index() {
           backgroundColor: "aliceblue",
         }}
       >
-        
-        <NoTask/>
+        {/* Display NoTask component if no tasks added */}
+        {/* <NoTask/> */}
+        <Task/>
         <Box>
           <NewTaskBtn/>
         </Box>
