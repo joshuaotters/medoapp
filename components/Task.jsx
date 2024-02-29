@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import TaskState from './TaskState';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 
 export default function Task() {
@@ -53,14 +54,14 @@ export default function Task() {
           fontWeight: "600",
           padding: "0.5rem"
         }}>Pending</Typography>
-        <Typography sx={{
-          marginLeft: "1.2rem",
+      </CardActions>
+      <Typography sx={{
+          margin: '0.5rem',
           borderRadius: "6px",
           backgroundColor: "#DFFFFD",
           fontWeight: "600",
           padding: "0.5rem"
-        }}>Low</Typography>
-      </CardActions>
+        }}>Priority: Low</Typography>
     </Card>
   );
 }

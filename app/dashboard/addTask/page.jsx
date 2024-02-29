@@ -37,7 +37,9 @@ export default function AddTask() {
         transition: 'opacity 0.9s ease-in-out'
       }
 }}>
-      <Typography>Add New Task</Typography>
+      <Typography gutterBottom variant="h5" component="div" sx={{fontWeight: "500", textAlign: "center", mt: 2}}>
+          Add New Task
+        </Typography>
       <Container
         sx={{
           borderRadius: "10px",
