@@ -1,10 +1,10 @@
-import mongoose,  {Schema} from mongoose;
+import mongoose,  {Schema} from 'mongoose';
 
 const taskSchema = new Schema (
     {
         title: String,
         description: String,
-        dueDate: {type: Date, default: Date.now},
+        dueDate: {type: Date},
         category: { type: String, enum: ['Work', 'Personal', 'Family', 'Other']},
         taskPriority: {type: String, enum: ['Low', 'High', 'Urgent']},
         taskState: { type: String, enum: ['Pending', 'Complete'], default: 'Pending'}
@@ -14,5 +14,5 @@ const taskSchema = new Schema (
     }
 );
 
-const task = mongoose.models.Task || mongoose.model('Task', taskSchema, 'tasks');
-export default Task();
+const Task = mongoose.models.Task || mongoose.model('Task', taskSchema);
+export default Task;
