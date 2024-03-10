@@ -13,6 +13,6 @@ export async function PUT(request, {params}){
         newTaskState: taskState,
         } = await request.json();
     await connectMongoDB();
-    await Task.findByIdAndUpdate(id, {title, description, dueDate, category, taskPriority, taskState});
+    await Task.findByIdAndUpdate(id, {$set: {title, description, dueDate, category, taskPriority, taskState}}, {new: true});
     return NextResponse.json({message: "Task updated"}, {status: 200});
 }
