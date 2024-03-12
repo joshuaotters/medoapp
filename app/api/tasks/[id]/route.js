@@ -16,3 +16,11 @@ export async function PUT(request, {params}){
     await Task.findByIdAndUpdate(id, {$set: {title, description, dueDate, category, taskPriority, taskState}}, {new: true});
     return NextResponse.json({message: "Task updated"}, {status: 200});
 }
+
+export async function GET(request, {params}) {
+    const {id} = params;
+    await connectMongoDB();
+    const task = await Task.findById({_id: id});
+    console.log('Task fetch:', task)
+    return NextResponse.json({task}, {status: 200});
+}

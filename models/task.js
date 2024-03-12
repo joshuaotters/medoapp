@@ -5,9 +5,9 @@ const taskSchema = new Schema (
         title: {type: String, required: true},
         description: {type: String, required: true},
         dueDate: {type: Date, required: true},
-        category: { type: String, enum: ['Work', 'Personal', 'Family', 'Other'], required: true},
-        taskPriority: {type: String, enum: ['Low', 'High', 'Urgent'], required: true},
-        taskState: { type: String, enum: ['Pending', 'Complete'], default: 'Pending', required: true}
+        category: { type: String, enum: ['Work','Family', 'Personal', 'Other'], default: 'Work', required: true},
+        taskPriority: {type: String, enum: ['Low', 'Medium','High', 'Urgent'], default: 'High', required: true},
+        taskState: { type: String, enum: ['Pending', '-In-progress', 'Complete'], default: 'Pending', required: true}
     },
     {
         timestamps: true

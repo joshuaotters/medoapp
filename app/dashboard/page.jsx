@@ -29,17 +29,11 @@ export default function Index() {
       <Grid xs={12} sx={{padding: 2}}>
           <SortCriteria/>
       </Grid>
-      <Grid xs={6} sx={{padding: 2}}>
         <Task/>
-      </Grid>
-      <Grid xs={6} sx={{padding: 2}}>
-        <Task/>
-      </Grid>
-
-      {/* Content to show if NO tasks are available */}
+      {/* Content to show if NO tasks are available
       <Grid xs={12} sx={{padding: 2}}>
         <NoTask/>
-      </Grid>
+      </Grid> */}
       <NewTaskBtn/>
     </Grid>
     );

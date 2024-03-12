@@ -2,27 +2,40 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EventIcon from '@mui/icons-material/Event';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import Badge from '@mui/material/Badge';
-import MailIcon from '@mui/icons-material/Mail';
 import TaskState from './TaskState';
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+import dateTimeExtractor from '../utils/dateTimeExtractor';
+import Grid from '@mui/material/Unstable_Grid2';
+
+const getTasks = async() => {
+  try {
+    const res = await fetch('http:localhost:3000/api/tasks', {cache: 'no-store'})
+    if(!res.ok) {
+      throw new Error('Failed to fetch tasks');
+    }
+    return res.json();
+  } catch(error) {
+    console.log('Error loading tasks', error)
+  }
+}
 
 
-export default function Task() {
+
+export default async function Task() {
+  const {tasks} = await getTasks();
   return (
-    <Card sx={{ maxWidth: 345, backgroundColor: "#FFCACA" }}>
-      <CardContent sx={{color: "#000000"}}>
+    <>
+    {tasks.map((t) => (
+      <Grid xs={6} sx={{padding: 2}}>
+      <Card sx={{ maxWidth: 345, backgroundColor: "#FFCACA", mb: '1rem' }} key={t.id}>
+      <CardContent sx={{color: "text.primary"}}>
         <Typography gutterBottom variant="h5" component="div" sx={{fontWeight: "500"}}>
-          Take children to School
+          {t.title}
         </Typography>
-        <Typography variant="body2" color="#000000">
-          Wake at 5AM and drive kids to school. Remember to pick up their lunch boxes on way back to work.
+        <Typography variant="body2" color="text.secondary">
+          {t.description}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{
           display: "flex",
@@ -32,7 +45,7 @@ export default function Task() {
           fontSize: "1rem",
           color: "#000000"
           }}>
-          <AccessTimeFilledIcon sx={{ marginRight: "0.5rem" }}/>5:30pm
+          <AccessTimeFilledIcon sx={{ marginRight: "0.5rem" }}/>{t.dueDate}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{
           display: "flex",
@@ -42,7 +55,7 @@ export default function Task() {
           marginTop: "0.5rem",
           color: "#000000"
           }}>
-          <EventIcon sx={{ marginRight: "0.5rem" }}/> 12-Dec-2023
+          <EventIcon sx={{ marginRight: "0.5rem" }}/> {t.dueDate}
         </Typography>
       </CardContent>
       <CardActions>
@@ -61,7 +74,10 @@ export default function Task() {
           backgroundColor: "#DFFFFD",
           fontWeight: "600",
           padding: "0.5rem"
-        }}>Priority: Low</Typography>
+        }}>Priority: {t.taskPriority}</Typography>
     </Card>
+    </Grid>
+    ))} 
+    </>
   );
 }
