@@ -45,7 +45,7 @@ export default async function Task() {
           fontSize: "1rem",
           color: "#000000"
           }}>
-          <AccessTimeFilledIcon sx={{ marginRight: "0.5rem" }}/>{}
+          <AccessTimeFilledIcon sx={{ marginRight: "0.5rem" }}/>{t.time}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{
           display: "flex",

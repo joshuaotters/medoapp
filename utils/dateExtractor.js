@@ -1,5 +1,5 @@
-//DateTimeExtractor Utility
-//This utility extracts independent date and time values from an ISO type timestamp
+//DateExtractor Utility
+//This utility extracts independent date from an ISO type timestamp
 
 function dateExtractor(isoTimestamp) {
     // const isoTimestamp = '2024-03-07T07:44:20.500Z';
