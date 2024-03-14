@@ -6,8 +6,10 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EventIcon from '@mui/icons-material/Event';
 import Typography from '@mui/material/Typography';
 import TaskState from './TaskState';
-import dateTimeExtractor from '../utils/dateExtractor';
 import Grid from '@mui/material/Unstable_Grid2';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import Link from '@mui/material/Link';
+
 
 const getTasks = async() => {
   try {
@@ -28,14 +30,14 @@ export default async function Task() {
   return (
     <>
     {processedTasks.map((t) => (
-      <Grid xs={6} sx={{padding: 2}} key={t.id}>
+      <Grid xs={6} sx={{padding: 2}} key={t._id}>
       <Card sx={{ maxWidth: 345, backgroundColor: "#FFCACA", mb: '1rem' }}>
       <CardContent sx={{color: "text.primary"}}>
         <Typography gutterBottom variant="h5" component="div" sx={{fontWeight: "500"}}>
           {t.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {t.description}
+        {t.description}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{
           display: "flex",
@@ -67,6 +69,7 @@ export default async function Task() {
           fontWeight: "600",
           padding: "0.5rem"
         }}>Pending</Typography>
+        <Link href={t.id}><EditNoteIcon sx={{ fontSize: "2.5rem" }} color="inherit"/></Link>
       </CardActions>
       <Typography sx={{
           margin: '0.5rem',
