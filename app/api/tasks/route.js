@@ -15,13 +15,7 @@ export async function POST(request) {
 export async function GET() {
     await connectMongoDB();
     const tasks = await Task.find();
-    //Process Task Object TimeStamps for Frontend Readability
-    const processedTasks = tasks.map((t) => ({
-        ...t.toObject(),
-        time: timeExtractor(t.dueDate),
-        deadLine: dateExtractor(t.dueDate),
-    }))
-    return NextResponse.json({processedTasks});
+    return NextResponse.json({tasks});
 }
 
 export async function DELETE (request) {

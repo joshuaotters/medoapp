@@ -10,14 +10,10 @@ function timeExtractor(isoTimestamp) {
     const hours = dateObject.getUTCHours().toString().padStart(2, 0);
     const minutes = dateObject.getUTCMinutes().toString().padStart(2, 0);
     
-    const time = `${hours}:${minutes}`;
-    if(hours >= 12) {
-        const time = `${hours}:${minutes} PM`;
-        return time;
-    } else {
-        const time = `${hours}:${minutes} AM`;
-        return time;
-    }
+    const time = `${hours}:${minutes}Hrs`;
+    //Determine
+   
+    return time;
     
 }
 

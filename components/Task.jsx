@@ -9,6 +9,8 @@ import TaskState from './TaskState';
 import Grid from '@mui/material/Unstable_Grid2';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import Link from '@mui/material/Link';
+import dateExtractor from "@/utils/dateExtractor";
+import timeExtractor from "@/utils/timeExtractor";
 
 
 const getTasks = async() => {
@@ -26,17 +28,17 @@ const getTasks = async() => {
 
 
 export default async function Task() {
-  const {processedTasks} = await getTasks();
+  const {tasks} = await getTasks();
   return (
     <>
-    {processedTasks.map((t) => (
+    {tasks.map((t) => (
       <Grid xs={6} sx={{padding: 2}} key={t._id}>
       <Card sx={{ maxWidth: 345, backgroundColor: "#FFCACA", mb: '1rem' }}>
       <CardContent sx={{color: "text.primary"}}>
         <Typography gutterBottom variant="h5" component="div" sx={{fontWeight: "500"}}>
           {t.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="#272525" sx={{fontSize: "1.1rem"}}>
         {t.description}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{
@@ -47,7 +49,7 @@ export default async function Task() {
           fontSize: "1rem",
           color: "#000000"
           }}>
-          <AccessTimeFilledIcon sx={{ marginRight: "0.5rem" }}/>{t.time}
+          <AccessTimeFilledIcon sx={{ marginRight: "0.5rem" }}/>{timeExtractor(t.dueDate)}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{
           display: "flex",
@@ -57,7 +59,7 @@ export default async function Task() {
           marginTop: "0.5rem",
           color: "#000000"
           }}>
-          <EventIcon sx={{ marginRight: "0.5rem" }}/> {t.deadLine}
+          <EventIcon sx={{ marginRight: "0.5rem" }}/> {dateExtractor(t.dueDate)}
         </Typography>
       </CardContent>
       <CardActions>
@@ -69,7 +71,7 @@ export default async function Task() {
           fontWeight: "600",
           padding: "0.5rem"
         }}>Pending</Typography>
-        <Link href={t.id}><EditNoteIcon sx={{ fontSize: "2.5rem" }} color="inherit"/></Link>
+        <Link href={`/api/tasks/${t._id}`}><EditNoteIcon sx={{ fontSize: "2.5rem", color: "#000000"}}/></Link>
       </CardActions>
       <Typography sx={{
           margin: '0.5rem',
