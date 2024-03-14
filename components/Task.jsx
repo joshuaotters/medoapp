@@ -6,7 +6,7 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EventIcon from '@mui/icons-material/Event';
 import Typography from '@mui/material/Typography';
 import TaskState from './TaskState';
-import dateTimeExtractor from '../utils/dateTimeExtractor';
+import dateTimeExtractor from '../utils/dateExtractor';
 import Grid from '@mui/material/Unstable_Grid2';
 
 const getTasks = async() => {
@@ -24,12 +24,12 @@ const getTasks = async() => {
 
 
 export default async function Task() {
-  const {tasks} = await getTasks();
+  const {processedTasks} = await getTasks();
   return (
     <>
-    {tasks.map((t) => (
-      <Grid xs={6} sx={{padding: 2}}>
-      <Card sx={{ maxWidth: 345, backgroundColor: "#FFCACA", mb: '1rem' }} key={t.id}>
+    {processedTasks.map((t) => (
+      <Grid xs={6} sx={{padding: 2}} key={t.id}>
+      <Card sx={{ maxWidth: 345, backgroundColor: "#FFCACA", mb: '1rem' }}>
       <CardContent sx={{color: "text.primary"}}>
         <Typography gutterBottom variant="h5" component="div" sx={{fontWeight: "500"}}>
           {t.title}
@@ -45,7 +45,7 @@ export default async function Task() {
           fontSize: "1rem",
           color: "#000000"
           }}>
-          <AccessTimeFilledIcon sx={{ marginRight: "0.5rem" }}/>{t.dueDate}
+          <AccessTimeFilledIcon sx={{ marginRight: "0.5rem" }}/>{}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{
           display: "flex",
@@ -55,7 +55,7 @@ export default async function Task() {
           marginTop: "0.5rem",
           color: "#000000"
           }}>
-          <EventIcon sx={{ marginRight: "0.5rem" }}/> {t.dueDate}
+          <EventIcon sx={{ marginRight: "0.5rem" }}/> {t.deadLine}
         </Typography>
       </CardContent>
       <CardActions>

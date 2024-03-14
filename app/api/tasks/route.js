@@ -1,6 +1,8 @@
 import connectMongoDB from "@/libs/mongodb";
 import { NextResponse } from "next/server";
 import Task from '../../../models/task';
+import dateExtractor from "@/utils/dateExtractor";
+
 
 export async function POST(request) {
     const {title, description, dueDate, category, taskPriority, taskState} = await request.json();
@@ -12,7 +14,11 @@ export async function POST(request) {
 export async function GET() {
     await connectMongoDB();
     const tasks = await Task.find();
-    return NextResponse.json({tasks});
+    const processedTasks = tasks.map((t) => ({
+        ...t.toObject(),
+        deadLine: dateExtractor(t.dueDate),
+    }))
+    return NextResponse.json({processedTasks});
 }
 
 export async function DELETE (request) {

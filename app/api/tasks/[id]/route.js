@@ -1,6 +1,7 @@
 import connectMongoDB from "@/libs/mongodb";
 import { NextResponse } from "next/server";
 import Task from '../../../../models/task';
+import dateExtractor from "@/utils/dateExtractor";
 
 export async function PUT(request, {params}){
     const {id} = params;
@@ -21,6 +22,5 @@ export async function GET(request, {params}) {
     const {id} = params;
     await connectMongoDB();
     const task = await Task.findById({_id: id});
-    console.log('Task fetch:', task)
     return NextResponse.json({task}, {status: 200});
 }
