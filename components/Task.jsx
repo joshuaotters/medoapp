@@ -71,7 +71,7 @@ export default async function Task() {
           fontWeight: "600",
           padding: "0.5rem"
         }}>Pending</Typography>
-        <Link href={`/api/tasks/${t._id}`}><EditNoteIcon sx={{ fontSize: "2.5rem", color: "#000000"}}/></Link>
+        <Link href={`/dashboard/editTask/${t._id}`}><EditNoteIcon sx={{ fontSize: "2.5rem", color: "#000000"}}/></Link>
       </CardActions>
       <Typography sx={{
           margin: '0.5rem',
