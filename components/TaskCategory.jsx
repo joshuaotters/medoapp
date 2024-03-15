@@ -26,8 +26,9 @@ export default function TaskCategory() {
             <em>None</em>
           </MenuItem>
           <MenuItem value={10}>Work</MenuItem>
-          <MenuItem value={20}>Personal</MenuItem>
           <MenuItem value={30}>Family</MenuItem>
+          <MenuItem value={20}>Personal</MenuItem>
+          <MenuItem value={20}>Other</MenuItem>
         </Select>
         <FormHelperText>Task Category</FormHelperText>
       </FormControl>

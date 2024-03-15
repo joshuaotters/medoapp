@@ -26,6 +26,7 @@ export default function TaskPriority() {
             <em>None</em>
           </MenuItem>
           <MenuItem value={10}>Low</MenuItem>
+          <MenuItem value={20}>Medium</MenuItem>
           <MenuItem value={20}>High</MenuItem>
           <MenuItem value={30}>Urgent</MenuItem>
         </Select>
