@@ -8,6 +8,7 @@ import CustomTextField from "@/components/Textfield";
 import { FormControl } from "@mui/base";
 import SubmitBtn from "@/components/SubmitButton";
 import { useState } from "react";
+import { useEffect } from "react";
 
 //Date Picker Imports
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
@@ -25,12 +26,23 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import DoneIcon from "@mui/icons-material/Done";
 
+//Radio Component Imports
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+
 export default function AddTask() {
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [taskCategory, setTaskCategory] = useState("");
   const [taskPriority, setTaskPriority] = useState("");
+  const [taskState, setTaskState] = useState("Pending");
+
+  useEffect(() => {
+    setTaskState("Pending");
+  }, []);
 
   return (
     <Container
@@ -128,7 +140,7 @@ export default function AddTask() {
             value={taskPriority}
             label="Task Priority"
             onChange={(e) => setTaskPriority(e.target.value)}
-            sx={{ minWidth: "100%" }}>
+            sx={{ mb: 3, minWidth: "100%" }}>
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
@@ -137,7 +149,31 @@ export default function AddTask() {
             <MenuItem value={"High"}>High</MenuItem>
             <MenuItem value={"Urgent"}>Urgent</MenuItem>
           </Select>
-          <FormHelperText>Task Priority</FormHelperText>
+
+          <FormLabel id="taskState-label">Task State</FormLabel>
+          <RadioGroup
+            row
+            aria-labelledby="taskState-label"
+            defaultValue="Pending"
+            name="row-radio-buttons-group"
+            onChange={(e) => setTaskState(e.target.value)}>
+            <FormControlLabel
+              value="Pending"
+              control={<Radio />}
+              label="Pending"
+            />
+            <FormControlLabel
+              value="Completed"
+              control={<Radio />}
+              label="Completed"
+            />
+            <FormControlLabel
+              value="disabled"
+              disabled
+              control={<Radio />}
+              label="other"
+            />
+          </RadioGroup>
 
           {/* Submit Button */}
           <Button
