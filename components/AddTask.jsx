@@ -7,14 +7,15 @@ import TextArea from "@/components/TextArea";
 import CustomTextField from "@/components/Textfield";
 import { FormControl } from "@mui/base";
 import SubmitBtn from "@/components/SubmitButton";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 //Date Picker Imports
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DatePicker } from "@mui/x-date-pickers";
 
 //Select Component Imports
 import InputLabel from "@mui/material/InputLabel";
@@ -33,16 +34,77 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 
 export default function AddTask() {
-  const [taskName, setTaskName] = useState("");
+  const [title, setTaskTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [taskCategory, setTaskCategory] = useState("");
+  const [category, setCategory] = useState("");
   const [taskPriority, setTaskPriority] = useState("");
   const [taskState, setTaskState] = useState("Pending");
+
+  const router = useRouter();
 
   useEffect(() => {
     setTaskState("Pending");
   }, []);
+
+  const handleDateChange = (date) => {
+    setDueDate(date);
+    // Handle any other logic related to the date component
+  };
+
+  const handleSubmit = async (e) => {
+    //Temporal Code
+
+    e.preventDefault();
+    console.log(
+      "Task Name:",
+      title,
+      "Description:",
+      description,
+      "Due Date",
+      dueDate,
+      "Task Category: ",
+      category,
+      "Task Priority: ",
+      taskPriority,
+      "Task State: ",
+      taskState
+    );
+    // if (
+    //   !title ||
+    //   !description ||
+    //   !dueDate ||
+    //   !category ||
+    //   !taskPriority ||
+    //   !taskState
+    // ) {
+    //   alert("One or more needs to be supplied");
+    //   return;
+    // }
+    try {
+      const res = await fetch("http://localhost:3000/api/tasks", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          dueDate,
+          category,
+          taskPriority,
+          taskState,
+        }),
+      });
+      if (res.ok) {
+        router.push("/dashboard");
+      } else {
+        throw new Error("Failed to create a task");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container
@@ -72,121 +134,122 @@ export default function AddTask() {
           borderRadius: "10px",
           backgroundColor: "aliceblue",
         }}>
-        <FormControl sx={{ mt: 3, minWidth: "100%" }}>
-          {/* Task Name */}
-          <CustomTextField
-            id="taskName"
-            label="Task Name"
-            name="taskName"
-            placeholder="e.g., Study"
-            type="text"
-            onChange={(e) => setTaskName(e.target.value)}
-          />
-
-          {/* Task Description */}
-          <TextArea
-            id="description"
-            label="Description"
-            placeholder="Task description"
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          {/* Due Date Picker */}
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer
-              components={[
-                "DatePicker",
-                "MobileDatePicker",
-                "DesktopDatePicker",
-                "StaticDatePicker",
-              ]}>
-              <DemoItem>
-                <DatePicker
-                  id="dueDate"
-                  label="Due Date"
-                  onChange={(e) => setDueDate(e.target.value)}
-                />
-              </DemoItem>
-            </DemoContainer>
-          </LocalizationProvider>
-
-          {/* Task Category */}
-          <InputLabel id="taskCategory-label" sx={{ mt: 3 }}>
-            Category
-          </InputLabel>
-          <Select
-            labelId="taskCategory-label"
-            id="taskCategory"
-            value={taskCategory}
-            label="Category"
-            onChange={(e) => setTaskCategory(e.target.value)}
-            sx={{ minWidth: "100%" }}>
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"Work"}>Work</MenuItem>
-            <MenuItem value={"Family"}>Family</MenuItem>
-            <MenuItem value={"Personal"}>Personal</MenuItem>
-            <MenuItem value={"Other"}>Other</MenuItem>
-          </Select>
-          <FormHelperText>Task Category</FormHelperText>
-
-          {/* Task Priority */}
-          <InputLabel id="taskPriority-label" sx={{ mt: 3 }}>
-            Task Priority
-          </InputLabel>
-          <Select
-            labelId="taskPriority-label"
-            id="taskPriority"
-            value={taskPriority}
-            label="Task Priority"
-            onChange={(e) => setTaskPriority(e.target.value)}
-            sx={{ mb: 3, minWidth: "100%" }}>
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"Low"}>Low</MenuItem>
-            <MenuItem value={"Medium"}>Medium</MenuItem>
-            <MenuItem value={"High"}>High</MenuItem>
-            <MenuItem value={"Urgent"}>Urgent</MenuItem>
-          </Select>
-
-          <FormLabel id="taskState-label">Task State</FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="taskState-label"
-            defaultValue="Pending"
-            name="row-radio-buttons-group"
-            onChange={(e) => setTaskState(e.target.value)}>
-            <FormControlLabel
-              value="Pending"
-              control={<Radio />}
-              label="Pending"
+        <form onSubmit={handleSubmit}>
+          <FormControl sx={{ mt: 3, minWidth: "100%" }}>
+            {/* Task Name */}
+            <CustomTextField
+              id="title"
+              label="Task Title"
+              name="title"
+              placeholder="e.g., Study"
+              type="text"
+              onChange={(e) => setTaskTitle(e.target.value)}
             />
-            <FormControlLabel
-              value="Completed"
-              control={<Radio />}
-              label="Completed"
+            {/* Task Description */}
+            <TextArea
+              id="description"
+              label="Description"
+              name="description"
+              placeholder="Task description"
+              onChange={(e) => setDescription(e.target.value)}
             />
-            <FormControlLabel
-              value="disabled"
-              disabled
-              control={<Radio />}
-              label="other"
-            />
-          </RadioGroup>
+            {/* Due Date Picker */}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer
+                components={[
+                  "DatePicker",
+                  "MobileDatePicker",
+                  "DesktopDatePicker",
+                  "StaticDatePicker",
+                ]}>
+                <DemoItem>
+                  <DatePicker
+                    id="dueDate"
+                    label="Due Date"
+                    name="dueDate"
+                    inputFormat="DD-MM-YYYY"
+                    onChange={handleDateChange}
+                  />
+                </DemoItem>
+              </DemoContainer>
+            </LocalizationProvider>
 
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            startIcon={<DoneIcon />}
-            size="large"
-            onClick={() => submit()}>
-            Save
-          </Button>
-        </FormControl>
+            {/* Task Category */}
+            <InputLabel id="taskCategory-label" sx={{ mt: 3 }}>
+              Category
+            </InputLabel>
+            <Select
+              labelId="taskCategory-label"
+              id="taskCategory"
+              value={category}
+              label="Category"
+              name="category"
+              onChange={(e) => setCategory(e.target.value)}
+              sx={{ minWidth: "100%" }}>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={"Work"}>Work</MenuItem>
+              <MenuItem value={"Family"}>Family</MenuItem>
+              <MenuItem value={"Personal"}>Personal</MenuItem>
+              <MenuItem value={"Other"}>Other</MenuItem>
+            </Select>
+            <FormHelperText>Task Category</FormHelperText>
+            {/* Task Priority */}
+            <InputLabel id="taskPriority-label" sx={{ mt: 3 }}>
+              Task Priority
+            </InputLabel>
+            <Select
+              labelId="taskPriority-label"
+              id="taskPriority"
+              value={taskPriority}
+              label="Task Priority"
+              name="taskPriority"
+              onChange={(e) => setTaskPriority(e.target.value)}
+              sx={{ mb: 3, minWidth: "100%" }}>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={"Low"}>Low</MenuItem>
+              <MenuItem value={"Medium"}>Medium</MenuItem>
+              <MenuItem value={"High"}>High</MenuItem>
+              <MenuItem value={"Urgent"}>Urgent</MenuItem>
+            </Select>
+            {/* Task State */}
+            <FormLabel id="taskState-label">Task State</FormLabel>
+            <RadioGroup
+              aria-labelledby="taskState-label"
+              defaultValue="Pending"
+              name="taskState"
+              onChange={(e) => setTaskState(e.target.value)}>
+              <FormControlLabel
+                value="Pending"
+                control={<Radio />}
+                label="Pending"
+              />
+              <FormControlLabel
+                value="In-progress"
+                control={<Radio />}
+                label="In-progress"
+              />
+              <FormControlLabel
+                value="Completed"
+                control={<Radio />}
+                label="Completed"
+              />
+            </RadioGroup>
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              startIcon={<DoneIcon />}
+              size="large">
+              Save
+            </Button>
+          </FormControl>
+        </form>
       </Container>
     </Container>
   );
